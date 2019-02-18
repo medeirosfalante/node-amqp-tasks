@@ -42,8 +42,8 @@ export class NodeAmpqTasks {
       return conn.createChannel();
     }).then((ch) => {
       return ch.assertQueue(`${this.group}-${taskKey}`).then((ok) => {
-        return ch.consume(`${this.group}-${taskKey}`, (msg:string) => cb(ch,`${this.group}-${taskKey}`,msg));
-      });
+        return ch.consume(`${this.group}-${taskKey}`, (msg:string) => cb(ch,`${this.group}-${taskKey}`,msg,msg.content.toString())); 
+      }); 
     }).catch(console.warn);
   }
 
